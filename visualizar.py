@@ -290,3 +290,45 @@ if __name__ == "__main__":
     arreglo_prueba = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
     objetivo_prueba = 6
     ejecutar_busqueda(arreglo_prueba, objetivo_prueba)
+    
+    valores_n:list[int] =[]
+    llamadas_sin_memoria: list[int] = []
+    llamadas_con_memoria: list[int] = []
+
+    for i in range(0, 30, 1):
+        _, _, ejecucionsin = fibonacci_recursivo(i)
+        _,_,ejecucion = fibonacci_recursivo_memoria(i)
+        
+        valores_n.append(i)
+        llamadas_sin_memoria.append(ejecucionsin)
+        llamadas_con_memoria.append(ejecucion)
+    print("ANÁLISIS DE LLAMADAS EN FIBONACCI")
+    print("=" * 70)
+    print(f"{'n':<3} | {'Sin memoria':>12} | {'Con memoria':>12}")
+    print("-" * 35)
+    for n, sin_memoria, con_memoria in zip(
+        valores_n, llamadas_sin_memoria, llamadas_con_memoria
+    ):
+        print(f"{n:<3} | {sin_memoria:>12} | {con_memoria:>12}")
+    # Análisis para búsqueda binaria con diferentes objetivos
+    print("\n" + "#" * 70 + "\n")
+    print("ANÁLISIS DE LLAMADAS EN BÚSQUEDA BINARIA")
+    print("=" * 70)
+    
+    arreglo_fijo = list(range(0, 41))  # Arreglo de 1 a 40
+    objetivos = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27,
+    28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40] # 41 no existe en el arreglo
+    
+    print(f"Arreglo: {arreglo_fijo}")
+    print(f"\n{'Objetivo':<10} | {'Total llamadas':>15}")
+    print("-" * 27)
+    
+    for objetivo in objetivos:
+        _, _, total_llamadas = busqueda_binaria_arbol(
+            arreglo_fijo,
+            objetivo,
+            0,
+            len(arreglo_fijo) - 1
+        )
+        
+        print(f"{objetivo:<10} | {total_llamadas:>15}")
